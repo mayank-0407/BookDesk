@@ -11,13 +11,21 @@ from company.models import Employee
 import math
 import random
 # Create your views here.
+def temp(request):
+    email="mayankaggarwal21121@gmail.com"
+        
+    email_subject='Password Changing Request In BookDesk'
+    email_message='Click this link  to Change Your Password.\n'+'Link:- '
+    SENDMAIL(email_subject,email_message,email)
+    return render(request,"home/temp.html", context={})
+
 def SENDMAIL(subject, message, email):
     try:
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [email, ]
         send_mail( subject, message, email_from, recipient_list )
     except:
-        print("Unable to send the email")
+        return HttpResponse('Unable to send Email')
         
 def generate_code(length):
     digits = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"

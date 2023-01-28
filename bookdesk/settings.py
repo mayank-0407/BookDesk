@@ -26,7 +26,7 @@ SECRET_KEY = os.environ["secret_key"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [os.environ["allowed_host"],"*"]
 
 
 # Application definition
@@ -78,12 +78,21 @@ WSGI_APPLICATION = os.environ["wsgi_application"]
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': str(BASE_DIR / 'db.sqlite3'),
+#     }
+# }
+DATABASES = {  
+    'default': {  
+        'ENGINE': 'django.db.backends.mysql',  
+        'NAME': os.environ["DATABASE_NAME"],  
+        'USER': os.environ["DATABASE_USER"],  
+        'PASSWORD': os.environ["DATABASE_PASSWORD"],  
+        'HOST': os.environ["DATABASE_HOST"], 
+    }  
+} 
 
 
 # Password validation
@@ -127,8 +136,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-EMAIL_BACKEND = os.environ["email_backend"]
-EMAIL_HOST = os.environ["email_host"]
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.environ["email_host_user"]
