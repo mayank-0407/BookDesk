@@ -15,6 +15,6 @@ Employees can not book desk for current day after 6 pm. Sign up Below for managi
 
 # How to run project locally
 - git clone https://github.com/mayank-0407/BookDesk.git
-- cd ./repo
+- cd ./BookDesk
 - pip install -r requirements.txt
 - python manage.py runserver
